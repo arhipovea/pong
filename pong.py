@@ -2,7 +2,7 @@ import pygame
 import random
 
 
-# Цвета
+# Colors
 BLACK    = (    0,    0,    0)
 WHITE    = ( 0xFF, 0xFF, 0xFF)
 RED      = ( 0xFF,    0,    0)
@@ -22,36 +22,36 @@ clock = pygame.time.Clock()
 done = False
 
 
-# Инициализация
-    # Игроков
-    # Шарика
-    # Бонусов
+# Initialization
+    # Players
+    # Ball
+    # Bonus
 
-# Основной цикл
+# Main loop
 while not done:
-    # Обработка событий
+    # Event processing
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
                 
-    # Игровая логика
-        # Обработка игроков
+    # Game logic
+        # Player processing
 
-        # Пересечение шарика и платформы
+        # Imnterception player and ball
         
-        # Свободное движение шарика
+        # Ball moving
 
-        # Генерация бонусов
+        # Generate bonus
  
-        # Пересечение бонуса и платформы
+        # Interception bonus and player
 
 
                     
-    # Код для рисования
+    # Painting
     screen.fill(BLACK) 
     
-        # Основной режим игры
-        # Конец игры
+        # Main game mode
+        # Game over
 
     pygame.display.flip()      
     clock.tick(60)
