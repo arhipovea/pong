@@ -2,7 +2,7 @@ import pygame
 import random
 
 
-# Цвета
+
 BLACK    = (    0,    0,    0)
 WHITE    = ( 0xFF, 0xFF, 0xFF)
 RED      = ( 0xFF,    0,    0)
