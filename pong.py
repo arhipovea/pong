@@ -29,17 +29,17 @@ done = False
 widthPlatfPlr1 = 12
 heightPlatfPlr1 = 60
 speedPlatfPlr1 = 2
-coordYPlatfPlr1 = (winHeight-heightPlatfPlr1)/2
-platfPlr1L = False
-platfPlr1R = False
+coordYPlatfPlr1 = (winHeight - heightPlatfPlr1)/2
+platfPlr1U = False
+platfPlr1D = False
 
 # 2 Игрок(Plr2)
 widthPlatfPlr2 = 12
 heightPlatfPlr2 = 60
 speedPlatfPlr2 = 2
-coordYPlatfPlr2 = (winHeight-heightPlatfPlr2)/2
-platfPlr2L = False
-platfPlr2R = False
+coordYPlatfPlr2 = (winHeight - heightPlatfPlr2)/2
+platfPlr2U = False
+platfPlr2D = False
     # Шарика
     # Бонусов
 
@@ -53,55 +53,55 @@ while not done:
         if event.type == pygame.KEYDOWN:
             # 1
             if event.key == pygame.K_LEFT:
-                platfPlr1L = True
+                platfPlr1U = True
             if event.key == pygame.K_RIGHT:
-                platfPlr1R = True
+                platfPlr1D = True
             # 2
             if event.key == pygame.K_a:
-                platfPlr2L = True
+                platfPlr2U = True
             if event.key == pygame.K_d:
-                platfPlr2R = True
+                platfPlr2D = True
                 
         if event.type == pygame.KEYUP:
             # 1
             if event.key == pygame.K_LEFT:
-                platfPlr1L = False
+                platfPlr1U = False
             if event.key == pygame.K_RIGHT:
-                platfPlr1R = False
+                platfPlr1D = False
             # 2
             if event.key == pygame.K_a:
-                platfPlr2L = False
+                platfPlr2U = False
             if event.key == pygame.K_d:
-                platfPlr2R = False                
+                platfPlr2D = False                
     # Игровая логика
     
         # Обработка игроков
         
     # Условие движение платформы Игрока 1
-    if platfPlr1L == True:
+    if platfPlr1U == True:
         coordYPlatfPlr1 -= speedPlatfPlr1
         # Обработка верхней границы 
         if coordYPlatfPlr1 < 0:
             coordYPlatfPlr1 = 0
             
-    if platfPlr1R == True:
+    if platfPlr1D == True:
         coordYPlatfPlr1 += speedPlatfPlr1
         # Обработка нижней границы
-        if coordYPlatfPlr1 > winHeight-heightPlatfPlr1:
-            coordYPlatfPlr1 = winHeight-heightPlatfPlr1
+        if coordYPlatfPlr1 > winHeight - heightPlatfPlr1:
+            coordYPlatfPlr1 = winHeight - heightPlatfPlr1
             
     # Условие движение платформы Игрока 2
-    if platfPlr2L == True:
-        coordYPlatfPlr2-=speedPlatfPlr2
-        # Обработка левой границы 
+    if platfPlr2U == True:
+        coordYPlatfPlr2 -= speedPlatfPlr2
+        # Обработка верхней границы 
         if coordYPlatfPlr2 < 0:
             coordYPlatfPlr2 = 0
                         
-    if platfPlr2R == True:
-        coordYPlatfPlr2+=speedPlatfPlr2
-        # Обработка правой границы
-        if coordYPlatfPlr2 > winHeight-heightPlatfPlr2:
-            coordYPlatfPlr2 = winHeight-heightPlatfPlr2
+    if platfPlr2D == True:
+        coordYPlatfPlr2 += speedPlatfPlr2
+        # Обработка нижней границы
+        if coordYPlatfPlr2 > winHeight - heightPlatfPlr2:
+            coordYPlatfPlr2 = winHeight - heightPlatfPlr2
             
         # Пересечение шарика и платформы
         
@@ -121,7 +121,7 @@ while not done:
     pygame.draw.rect(screen, black, [2, coordYPlatfPlr1, widthPlatfPlr1, heightPlatfPlr1])
     
     # Прорисовка платформы игрока 2
-    pygame.draw.rect(screen, black, [winWidth-(widthPlatfPlr1+2), coordYPlatfPlr2, widthPlatfPlr2, heightPlatfPlr2])
+    pygame.draw.rect(screen, black, [winWidth - (widthPlatfPlr1 + 2), coordYPlatfPlr2, widthPlatfPlr2, heightPlatfPlr2])
         # Конец игры
 
     pygame.display.update()      
