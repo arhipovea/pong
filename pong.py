@@ -28,7 +28,7 @@ done = False
 # 1 Игрок(Plr1)
 widthPlatfPlr1 = 60
 heightPlatfPlr1 = 12
-speedPlatfPlr1 = 1
+speedPlatfPlr1 = 2
 coordXPlatfPlr1 = (winWidth-widthPlatfPlr1)/2
 platfPlr1L = False
 platfPlr1R = False
@@ -36,7 +36,7 @@ platfPlr1R = False
 # 2 Игрок(Plr2)
 widthPlatfPlr2 = 60
 heightPlatfPlr2 = 12
-speedPlatfPlr2 = 1
+speedPlatfPlr2 = 2
 coordXPlatfPlr2 = (winWidth-widthPlatfPlr2)/2
 platfPlr2L = False
 platfPlr2R = False
@@ -58,9 +58,9 @@ while not done:
                 platfPlr1R = True
             # 2
             if event.key == pygame.K_a:
-                platfPlr2L == True
+                platfPlr2L = True
             if event.key == pygame.K_d:
-                platfPlr2R == True
+                platfPlr2R = True
                 
         if event.type == pygame.KEYUP:
             # 1
@@ -125,6 +125,6 @@ while not done:
         # Конец игры
 
     pygame.display.update()      
-    clock.tick(100)
+    clock.tick(200)
 
 pygame.quit()
