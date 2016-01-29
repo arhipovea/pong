@@ -1,4 +1,4 @@
-# Ping Pong
+# Multiplayer hotchair Ping Pong
 
 import pygame
 import random
