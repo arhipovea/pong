@@ -6,6 +6,7 @@ import random
 black = (0, 0, 0)
 white = (0xFF, 0xFF, 0xFF)
 red = (0xFF, 0, 0)
+siniy = (0, 0, 0xFF)
 
 
 pygame.init()
@@ -21,7 +22,6 @@ pygame.display.set_caption("Ping Pong")
 clock = pygame.time.Clock()
 done = False
 
-
 # Инициализация
     # Игроков
 
@@ -32,6 +32,7 @@ speedPlatfPlr1 = 2
 coordYPlatfPlr1 = (winHeight - heightPlatfPlr1)/2
 platfPlr1U = False
 platfPlr1D = False
+scorePlr1 = 0
 
 # 2 Игрок(Plr2)
 widthPlatfPlr2 = 12
@@ -40,6 +41,7 @@ speedPlatfPlr2 = 2
 coordYPlatfPlr2 = (winHeight - heightPlatfPlr2)/2
 platfPlr2U = False
 platfPlr2D = False
+scorePlr2 = 0
     # Шарика
     # Бонусов
 
@@ -74,9 +76,7 @@ while not done:
             if event.key == pygame.K_d:
                 platfPlr2D = False                
     # Игровая логика
-    
         # Обработка игроков
-        
     # Условие движение платформы Игрока 1
     if platfPlr1U == True:
         coordYPlatfPlr1 -= speedPlatfPlr1
@@ -117,11 +117,23 @@ while not done:
     screen.fill(white)
     
         # Основной режим игры
-    # Прорисовка платформы игрока 1
-    pygame.draw.rect(screen, black, [2, coordYPlatfPlr1, widthPlatfPlr1, heightPlatfPlr1])
+        
+    # Выведение кол-ва очков, набранных Игроком 1
+    plr1Font = pygame.font.Font(None, 25)
+    textScrPlr1 = plr1Font.render("Счёт 1 Игрока:" + str(scorePlr1), True, red)
+    screen.blit(textScrPlr1, [5, 1])
     
-    # Прорисовка платформы игрока 2
-    pygame.draw.rect(screen, black, [winWidth - (widthPlatfPlr1 + 2), coordYPlatfPlr2, widthPlatfPlr2, heightPlatfPlr2])
+    # Выведение кол-ва очков, набранных Игроком 2
+    plr2Font = pygame.font.Font(None, 25)
+    textScrPlr2 = plr2Font.render("Счёт 2 Игрока:" + str(scorePlr2), True, siniy)
+    screen.blit(textScrPlr2, [500, 1])    
+    
+    # Прорисовкаплатформы Игрока 1
+    pygame.draw.rect(screen, red, [2, coordYPlatfPlr1, widthPlatfPlr1, heightPlatfPlr1])
+    
+    # Прорисовка платформы Игрока 2
+    pygame.draw.rect(screen, siniy, [winWidth - (widthPlatfPlr1 + 2), coordYPlatfPlr2, widthPlatfPlr2, heightPlatfPlr2])
+    
         # Конец игры
 
     pygame.display.update()      
