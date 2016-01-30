@@ -43,6 +43,12 @@ platfPlr2U = False
 platfPlr2D = False
 scorePlr2 = 0
     # Шарика
+spedBollX=0
+spedBollY=0
+BollX=0
+BollY=0
+BollWidth=20    
+    
     # Бонусов
 
 # Основной цикл
@@ -76,6 +82,9 @@ while not done:
             if event.key == pygame.K_d:
                 platfPlr2D = False                
     # Игровая логика
+    #Движение шарика
+    BollX=BollX+spedBollX
+    BollY=BollY+spedBollY 
         # Обработка игроков
     # Условие движение платформы Игрока 1
     if platfPlr1U == True:
@@ -104,6 +113,20 @@ while not done:
             coordYPlatfPlr2 = winHeight - heightPlatfPlr2
             
         # Пересечение шарика и платформы
+           #Обработка отскакивания 
+         #А)От первого игрока
+    if widthPlatfPlr1 > BollX and (coordYPlatfPlr2+heightPlatfPlr2 > BollY or BollY >coordYPlatfPlr) :
+        spedBollX=spedBollX*-1        
+        #Б)От второго игрока  
+    if winWidth-widthPlatfPlr1-50<BollX and (coordYPlatfPlr2+heightPlatfPlr2 > BollY or BollY >coordYPlatfPlr) :
+        spedBollX=spedBollX*-1 
+        #В)От потолка 
+    if BollY+50 > winHeight   :
+        spedBollY=spedBollY*-1  
+        #Г)ОТ пола
+    if BollY<0 : 
+        spedBollY=spedBollY*-1
+        BoolX=0
         
         # Свободное движение шарика
 
@@ -133,7 +156,8 @@ while not done:
     
     # Прорисовка платформы Игрока 2
     pygame.draw.rect(screen, siniy, [winWidth - (widthPlatfPlr1 + 2), coordYPlatfPlr2, widthPlatfPlr2, heightPlatfPlr2])
-    
+    # Прорисовка Шарика
+    pygame.draw.rect(screen, black,[BollX,BollY,BollWidth,BollWidth])
         # Конец игры
 
     pygame.display.update()      
