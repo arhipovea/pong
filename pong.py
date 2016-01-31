@@ -51,7 +51,7 @@ coordXBall = winWidth//2
 coordYBall = winHeight//2
 radiusBall = 7
 speedXBall = 1 
-speedYBall = 2
+speedYBall = 1
 
     # Конца Игры
 gameOverPlr1 = False
@@ -119,39 +119,32 @@ while not done:
         if coordYPlatfPlr2 > winHeight - heightPlatfPlr2:
             coordYPlatfPlr2 = winHeight - heightPlatfPlr2
             
-        # Пересечение шарика и платформы
-            # Игрока 2
-    if coordXBall + radiusBall == winWidth - widthPlatfPlr2:
-        speedXBall *= -1
-            # Игрока 1
-    if coordXBall == widthPlatfPlr1 + radiusBall:
-        speedXBall *= -1
-        
         # Свободное движение шарика
     coordXBall += speedXBall
     coordYBall += speedYBall
-    
-    if coordYBall + radiusBall > winHeight or coordYBall < radiusBall:
-        speedYBall *= -1
-        
+   
         # Генерация бонусов
- 
-        # Пересечение бонуса и платформы
-      #А)От первого игрока
-    if widthPlatfPlr1 == coordXBall-radiusBall and coordYPlatfPlr1+heightPlatfPlr1 > coordYBall and coordYBall > widthPlatfPlr1 :
-        speedXBall=speedXBall*-1
-            
-         #Б)От второго игрока  
-    if winWidth-12-radiusBall == coordXBall and coordYPlatfPlr2+heightPlatfPlr2 > coordYBall and coordYBall >widthPlatfPlr2:
-        speedXBall=speedXBall*-1
         
-         #В)От потолка  
-    if coordYBall+radiusBall == winHeight  :
-        speedYBall=speedYBall*-1
+        # Пересечение бонуса и платформы
+ 
+        # Пересечение шарика и платформы
+            # А)От первого игрока
+    if widthPlatfPlr1 == coordXBall - radiusBall and coordYPlatfPlr1 + heightPlatfPlr1 > coordYBall and coordYBall > widthPlatfPlr1:
+        speedXBall *= -1
+        scorePlr1 += 1
             
-         #Г)ОТ пола
-    if 0 == coordYBall : 
-        speedYBall=speedYBall*-1    
+             # Б)От второго игрока  
+    if winWidth - widthPlatfPlr2 - radiusBall == coordXBall and coordYPlatfPlr2 + heightPlatfPlr2 > coordYBall and coordYBall > widthPlatfPlr2:
+        speedXBall *= -1
+        scorePlr2 += 1
+        
+             # В)От пола  
+    if coordYBall + radiusBall == winHeight:
+        speedYBall *= -1
+            
+             # Г)От потолка
+    if coordYBall == radiusBall: 
+        speedYBall *= -1    
 
         # Условие GameOver'a Игрока 1
     if coordXBall == radiusBall:
