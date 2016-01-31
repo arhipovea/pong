@@ -129,6 +129,21 @@ while not done:
         # Генерация бонусов
  
         # Пересечение бонуса и платформы
+      #А)От первого игрока
+    if widthPlatfPlr1 == coordXBall-radiusBall and coordYPlatfPlr1+heightPlatfPlr1 > coordYBall and coordYBall > widthPlatfPlr1 :
+        speedXBall=speedXBall*-1
+            
+         #Б)От второго игрока  
+    if winWidth-12-radiusBall == coordXBall and coordYPlatfPlr2+heightPlatfPlr2 > coordYBall and coordYBall >widthPlatfPlr2:
+        speedXBall=speedXBall*-1
+        
+         #В)От потолка  
+    if coordYBall+radiusBall == winHeight  :
+        speedYBall=speedYBall*-1
+            
+         #Г)ОТ пола
+    if 0 == coordYBall : 
+        speedYBall=speedYBall*-1    
 
         # Условие GameOver'a Игрока 1
     if coordXBall == radiusBall:
