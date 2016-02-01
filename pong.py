@@ -11,6 +11,7 @@ siniy = (0, 0, 0xFF)
 
 pygame.init()
 
+
 # Main window
 winWidth  = 640
 winHeight = 480
@@ -78,6 +79,7 @@ while not done:
                 platfPlr2U = True
             if event.key == pygame.K_DOWN:
                 platfPlr2D = True
+            # Перезапуск игры или выход из неё
             if event.key == pygame.K_n:
                 done = True
             if event.key == pygame.K_y:
@@ -201,7 +203,7 @@ while not done:
         gameOverFont = pygame.font.SysFont("Calibri", 20)
         textGmOvPlr2 = gameOverFont.render("Игрок 2 проиграл :( Итоговый счёт Игрока 1: " + str(scorePlr1) + " Итоговый счёт Игрока 2: " + str(scorePlr2), True, black)
         screen.blit(textGmOvPlr2, [5, 210])
-        
+            # Возможность перезапуска игры или выхода из неё
     if gameOverPlr1 == True or gameOverPlr2 == True:
         returnGameFont = pygame.font.SysFont("Calibri", 20)
         textReturnGame = returnGameFont.render("Хотите ли вы начать игру заново? Если да, то нажмите Y, если нет - N", True, black)
