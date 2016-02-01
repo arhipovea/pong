@@ -129,12 +129,12 @@ while not done:
  
         # Пересечение шарика и платформы
             # А)От первого игрока
-    if widthPlatfPlr1 == coordXBall - radiusBall and coordYPlatfPlr1 + heightPlatfPlr1 > coordYBall and coordYBall > widthPlatfPlr1:
+    if widthPlatfPlr1 == coordXBall - radiusBall and coordYPlatfPlr1 + heightPlatfPlr1 > coordYBall and coordYBall > coordYPlatfPlr1:
         speedXBall *= -1
         scorePlr1 += 1
             
              # Б)От второго игрока  
-    if winWidth - widthPlatfPlr2 - radiusBall == coordXBall and coordYPlatfPlr2 + heightPlatfPlr2 > coordYBall and coordYBall > widthPlatfPlr2:
+    if winWidth - widthPlatfPlr2 - radiusBall == coordXBall and coordYPlatfPlr2 + heightPlatfPlr2 > coordYBall and coordYBall > coordYPlatfPlr2:
         speedXBall *= -1
         scorePlr2 += 1
         
