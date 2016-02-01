@@ -66,29 +66,38 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
-        # Обработка нажатий клавиш "Стрелка влево" и "Стрелка вправо" для управления платформой Игрока 1 и клавиш "A" и "D" для управления платформой Игрока 2
+        # Обработка нажатий клавиш "W" и "S" для управления платформой Игрока 1 и клавиш "Стрелка вверх" и "Стрелка вниз" для управления платформой Игрока 2
         if event.type == pygame.KEYDOWN:
             # 1
-            if event.key == pygame.K_LEFT:
+            if event.key == pygame.K_w:
                 platfPlr1U = True
-            if event.key == pygame.K_RIGHT:
+            if event.key == pygame.K_s:
                 platfPlr1D = True
             # 2
-            if event.key == pygame.K_a:
+            if event.key == pygame.K_UP:
                 platfPlr2U = True
-            if event.key == pygame.K_d:
+            if event.key == pygame.K_DOWN:
                 platfPlr2D = True
-                
+            if event.key == pygame.K_n:
+                done = True
+            if event.key == pygame.K_y:
+                scorePlr1 = 0
+                scorePlr2 = 0
+                coordXBall = winWidth//2
+                coordYBall = winHeight//2
+                gameOverPlr1 = False
+                gameOverPlr2 = False
+            
         if event.type == pygame.KEYUP:
             # 1
-            if event.key == pygame.K_LEFT:
+            if event.key == pygame.K_w:
                 platfPlr1U = False
-            if event.key == pygame.K_RIGHT:
+            if event.key == pygame.K_s:
                 platfPlr1D = False
             # 2
-            if event.key == pygame.K_a:
+            if event.key == pygame.K_UP:
                 platfPlr2U = False
-            if event.key == pygame.K_d:
+            if event.key == pygame.K_DOWN:
                 platfPlr2D = False 
             
     # Игровая логика
@@ -193,6 +202,11 @@ while not done:
         textGmOvPlr2 = gameOverFont.render("Игрок 2 проиграл :( Итоговый счёт Игрока 1: " + str(scorePlr1) + " Итоговый счёт Игрока 2: " + str(scorePlr2), True, black)
         screen.blit(textGmOvPlr2, [5, 210])
         
+    if gameOverPlr1 == True or gameOverPlr2 == True:
+        returnGameFont = pygame.font.SysFont("Calibri", 20)
+        textReturnGame = returnGameFont.render("Хотите ли вы начать игру заново? Если да, то нажмите Y, если нет - N", True, black)
+        screen.blit(textReturnGame, [15, 300])
+
     pygame.display.update()      
     clock.tick(200)
 
