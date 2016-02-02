@@ -59,7 +59,18 @@ gameOverPlr1 = False
 gameOverPlr2 = False
 
     # Бонусов
-
+RandAddBonus = random.randrange(2)
+WidthObjBonus = 10
+HeightObjBonus = 10
+SpeedObjBonus = 2
+FlagBonus = 0
+coordXBonus = winWidth/2
+coordYBonus = random.randrange(480)
+BonusSpeed = 0.5
+BuffTime1 = 0
+BuffTime2 = 0
+FlagBonusTime1 = 0
+FlagBonusTime2 = 0
 
 # Основной цикл
 while not done:
@@ -134,10 +145,63 @@ while not done:
     coordXBall += speedXBall
     coordYBall += speedYBall
    
+        # Условие движение бонусов
+        
+    if FlagBonus == 1:
+        if RandAddBonus == 0:
+            coordXBonus = coordXBonus + BonusSpeed
+        if RandAddBonus == 1:
+            coordXBonus = coordXBonus - BonusSpeed
+        if coordXBonus == winWidth:
+            BonusSpeed = BonusSpeed * -1
+        if coordXBonus == 0:
+            BonusSpeed = BonusSpeed * -1    
+       
+        # Мигание бонуса 
+    colorwink = (random.randrange(256), random.randrange(256), random.randrange(256))
         # Генерация бонусов
+    BonusFlyTime = 0
+    RandBonusLong = random.randrange(5000) 
+    if RandBonusLong == 0:
+        FlagBonus = 1
         
         # Пересечение бонуса и платформы
- 
+       
+        # Player 1
+    
+    if widthPlatfPlr1 == coordXBonus and coordYPlatfPlr1 + heightPlatfPlr1 > coordYBonus and coordYBonus > coordYPlatfPlr1:
+        FlagBonus=0
+        coordXBonus = winWidth/2
+        coordYBonus = random.randrange(480) 
+        BonusSpeed = BonusSpeed * -1
+        heightPlatfPlr1 = 120
+        FlagBonusTime1 = 1
+
+        # Player 2
+        
+    if winWidth - widthPlatfPlr2 == coordXBonus and coordYPlatfPlr2 + heightPlatfPlr2 > coordYBonus and coordYBonus > coordYPlatfPlr2: 
+        FlagBonus=0
+        coordXBonus = winWidth/2
+        coordYBonus = random.randrange(480) 
+        BonusSpeed = BonusSpeed * -1
+        heightPlatfPlr2 = 120
+        FlagBonusTime2 = 1
+        
+         # Время эффекта бонуса 
+    
+    if FlagBonusTime1 == 1:
+        BuffTime1 = BuffTime1 + 1
+    if BuffTime1 == 1500:
+        FlagBonus = 1
+        BuffTime1 = 0
+        heightPlatfPlr1 = 60
+    if FlagBonusTime2 == 1:
+        BuffTime2 = BuffTime2 + 1   
+    if BuffTime2 == 1500:
+        FlagBonus = 1
+        BuffTime2 = 0
+        heightPlatfPlr2 = 60
+        
         # Пересечение шарика и платформы
             # А)От первого игрока
     if widthPlatfPlr1 == coordXBall - radiusBall and coordYPlatfPlr1 + heightPlatfPlr1 > coordYBall and coordYBall > coordYPlatfPlr1:
@@ -187,6 +251,11 @@ while not done:
     
             # Прорисовка шарика
     pygame.draw.circle(screen, black, [coordXBall, coordYBall], radiusBall)
+            
+            # Прорисовка бонусов 
+    if FlagBonus == 1:
+        pygame.draw.rect(screen, colorwink, [coordXBonus, coordYBonus, WidthObjBonus, HeightObjBonus]) 
+
     
     
         # Конец игры
