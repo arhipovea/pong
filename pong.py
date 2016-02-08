@@ -47,12 +47,18 @@ platfPlr2D = False
 scorePlr2 = 0
 listPlr2=[winWidth - (widthPlatfPlr1 + 2), coordYPlatfPlr2, widthPlatfPlr2, heightPlatfPlr2]
 
-    # Шарика
-coordXBall = winWidth//2
-coordYBall = winHeight//2
-radiusBall = 7
-speedXBall = 1 
-speedYBall = 1
+    # 1й шарик
+coordXBall  = winWidth//2
+coordYBall  = winHeight//2
+radiusBall  = 7
+speedXBall  = 1 
+speedYBall  = 1
+    # 2й шарик
+coordXBall2 = winWidth//3
+coordYBall2 = winHeight//3
+
+
+
 
     # Конца Игры
 gameOverPlr1 = False
@@ -141,6 +147,11 @@ while not done:
         if coordYPlatfPlr2 > winHeight - heightPlatfPlr2:
             coordYPlatfPlr2 = winHeight - heightPlatfPlr2
             
+        
+        # Функция рисующая шарик 
+        
+    def sharik(coordXBall,coordYBall):
+        pygame.draw.circle(screen, black, [coordXBall, coordYBall], radiusBall)
         # Свободное движение шарика
     coordXBall += speedXBall
     coordYBall += speedYBall
@@ -250,7 +261,7 @@ while not done:
     pygame.draw.rect(screen, siniy, [winWidth - (widthPlatfPlr1 + 2), coordYPlatfPlr2, widthPlatfPlr2, heightPlatfPlr2])
     
             # Прорисовка шарика
-    pygame.draw.circle(screen, black, [coordXBall, coordYBall], radiusBall)
+    sharik(coordXBall,coordYBall)
             
             # Прорисовка бонусов 
     if FlagBonus == 1:
