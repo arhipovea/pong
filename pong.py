@@ -39,8 +39,8 @@ def gameLoop():
     # Инициализация
         # Игроков
             # 1 Игрок(Plr1)
-    widthPlatfPlr1 = 12
-    heightPlatfPlr1 = 60
+    widthPlatfPlr1 = 20
+    heightPlatfPlr1 = 100
     speedPlatfPlr1 = 2
     coordYPlatfPlr1 = (winHeight - heightPlatfPlr1)/2
     platfPlr1U = False
@@ -49,8 +49,8 @@ def gameLoop():
     listPlr1=[2, coordYPlatfPlr1, widthPlatfPlr1, heightPlatfPlr1]
     
             # 2 Игрок(Plr2)
-    widthPlatfPlr2 = 12
-    heightPlatfPlr2 = 60
+    widthPlatfPlr2 = 20
+    heightPlatfPlr2 = 100
     speedPlatfPlr2 = 2
     coordYPlatfPlr2 = (winHeight - heightPlatfPlr2)/2
     platfPlr2U = False
@@ -198,7 +198,7 @@ def gameLoop():
             coordXBonus = winWidth/2
             coordYBonus = random.randrange(480) 
             BonusSpeed = BonusSpeed * -1
-            heightPlatfPlr1 = 120
+            heightPlatfPlr1 = 140
             FlagBonusTime1 = 1
     
                 # Player 2
@@ -207,7 +207,7 @@ def gameLoop():
             coordXBonus = winWidth/2
             coordYBonus = random.randrange(480) 
             BonusSpeed = BonusSpeed * -1
-            heightPlatfPlr2 = 120
+            heightPlatfPlr2 = 140
             FlagBonusTime2 = 1
             
                 # Время эффекта бонуса 
@@ -216,38 +216,91 @@ def gameLoop():
         if BuffTime1 == 1500:
             FlagBonus = 1
             BuffTime1 = 0
-            heightPlatfPlr1 = 60
+            heightPlatfPlr1 = 100
         if FlagBonusTime2 == 1:
             BuffTime2 = BuffTime2 + 1   
         if BuffTime2 == 1500:
             FlagBonus = 1
             BuffTime2 = 0
-            heightPlatfPlr2 = 60
+            heightPlatfPlr2 = 100
             
             # Пересечение шарика и платформы
                 # А)От первого игрока
-        if widthPlatfPlr1 == coordXBall - radiusBall and coordYPlatfPlr1 + heightPlatfPlr1 > coordYBall and coordYBall > coordYPlatfPlr1:
+        if widthPlatfPlr1 > coordXBall - radiusBall and coordYPlatfPlr1 + (heightPlatfPlr1/5) > coordYBall and coordYBall > coordYPlatfPlr1:
+            speedXBall *= -1
+            speedYBall *=-2
+            scorePlr1 += 1 
+            
+        if widthPlatfPlr1 > coordXBall - radiusBall and coordYPlatfPlr1 + 2*(heightPlatfPlr1/5) > coordYBall and coordYBall > coordYPlatfPlr1 + (heightPlatfPlr1/5):
+            speedXBall *= -1
+            scorePlr1 += 1                
+        if widthPlatfPlr1 > coordXBall - radiusBall and coordYPlatfPlr1 + 3*(heightPlatfPlr1/5) > coordYBall and coordYBall > coordYPlatfPlr1 + 2*(heightPlatfPlr1/5):
+            speedXBall *= -2
+            scorePlr1 += 1 
+            
+        if widthPlatfPlr1 > coordXBall - radiusBall and coordYPlatfPlr1 + 4*(heightPlatfPlr1/5) > coordYBall and coordYBall > coordYPlatfPlr1 + 3*(heightPlatfPlr1/5):
             speedXBall *= -1
             scorePlr1 += 1
+                        
+        if widthPlatfPlr1 > coordXBall - radiusBall and coordYPlatfPlr1 + heightPlatfPlr1 > coordYBall and coordYBall > coordYPlatfPlr1 + 4*(heightPlatfPlr1/5):
+            speedXBall *= -1
+            speedYBall *=2
+            scorePlr1 += 1 
+            
+            
+           #Отскакивание от боковых частей для 1 платформы 
+        if widthPlatfPlr1 > coordXBall - radiusBall and coordYPlatfPlr1 == coordYBall :
+            speedXBall =1
+            speedYBall =-3
+            scorePlr1 += 1 
+        if widthPlatfPlr1 > coordXBall - radiusBall and coordYPlatfPlr1+heightPlatfPlr1 == coordYBall :
+            speedXBall =1
+            speedYBall =3
+            scorePlr1 += 1            
                 
                  # Б)От второго игрока  
-        if winWidth - widthPlatfPlr2 - radiusBall == coordXBall and coordYPlatfPlr2 + heightPlatfPlr2 > coordYBall and coordYBall > coordYPlatfPlr2:
+        if winWidth - widthPlatfPlr2 - radiusBall < coordXBall and coordYPlatfPlr2 + (heightPlatfPlr2/5) > coordYBall and coordYBall > coordYPlatfPlr1:
+            speedXBall *= -1
+            speedYBall *=-2
+            scorePlr2 += 1 
+        if winWidth - widthPlatfPlr2 - radiusBall < coordXBall and coordYPlatfPlr2 + 2*(heightPlatfPlr2/5) > coordYBall and coordYBall > coordYPlatfPlr2 + (heightPlatfPlr2/5):
             speedXBall *= -1
             scorePlr2 += 1
+        if winWidth - widthPlatfPlr2 - radiusBall < coordXBall and coordYPlatfPlr2+ 3*(heightPlatfPlr2/5) > coordYBall and coordYBall > coordYPlatfPlr2 + 2*(heightPlatfPlr2/5):
+            speedXBall *= -2
+            scorePlr2 += 1    
+        if winWidth - widthPlatfPlr2 - radiusBall < coordXBall and coordYPlatfPlr2 + 4*(heightPlatfPlr2/5) > coordYBall and coordYBall > coordYPlatfPlr2 + 3*(heightPlatfPlr2/5):
+            speedXBall *= -1
+            scorePlr2 += 1                
+        if winWidth - widthPlatfPlr2 - radiusBall < coordXBall and coordYPlatfPlr2 + heightPlatfPlr2 > coordYBall and coordYBall > coordYPlatfPlr2 + 4*(heightPlatfPlr2/5):
+            speedXBall *= -1
+            speedYBall =2
+            scorePlr2 += 1 
+            
+            #Отскакивание от боковых частей для 2 платформы 
+        if winWidth - widthPlatfPlr2 - radiusBall < coordXBall and coordYPlatfPlr1 == coordYBall :
+            speedXBall *=-1
+            speedYBall *=-3
+            scorePlr2 += 1 
+        if winWidth - widthPlatfPlr2 - radiusBall < coordXBall and coordYPlatfPlr1+heightPlatfPlr1 == coordYBall :
+            speedXBall *=1
+            speedYBall *=3
+            scorePlr2 += 1                  
+                        
             
                  # В)От пола  
-        if coordYBall + radiusBall == winHeight:
+        if coordYBall + radiusBall > winHeight:
             speedYBall *= -1
                 
                  # Г)От потолка
-        if coordYBall == radiusBall: 
+        if coordYBall-radiusBall < 0: 
             speedYBall *= -1
             
         # Условие проигрыша
-        if coordXBall + radiusBall == winWidth:
+        if coordXBall + radiusBall > winWidth:
             gameOver = True
             display = 2
-        if coordXBall - radiusBall == 0:
+        if coordXBall - radiusBall < 0:
             gameOver = True
             display = 1
             
